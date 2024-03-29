@@ -118,15 +118,15 @@ void loop() {
   Serial.println(LPGLevel);
 
 
-  if (!Firebase.setFloat(firebaseData, "/Humidity", humidity)) {
+  if (!Firebase.setFloat(firebaseData, "Air/Humidity", humidity)) {
     Serial.println("Failed to write to database");
     Serial.println("Reason: " + firebaseData.errorReason());
   }
-  if (!Firebase.setFloat(firebaseData, "/Temperature", temperature)) {
+  if (!Firebase.setFloat(firebaseData, "Air/Temperature", temperature)) {
     Serial.println("Failed to write to database");
     Serial.println("Reason: " + firebaseData.errorReason());
   }
-  if (!Firebase.setFloat(firebaseData, "/Gas", LPGLevel)) {
+  if (!Firebase.setFloat(firebaseData, "Air/Gas", LPGLevel)) {
     Serial.println("Failed to write to database");
     Serial.println("Reason: " + firebaseData.errorReason());
   }

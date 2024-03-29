@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "airquality",
-    "slug": "airquality",
+    "name": "air-quality",
+    "slug": "air-quality",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
