@@ -48,7 +48,7 @@ const RealTimeData = () => {
   const data3 = {
     labels: ["Gas"], // optional
     data: [
-      data.Gas/100,
+      data.Gas/10000,
     ]
   
   }
@@ -125,7 +125,7 @@ const RealTimeData = () => {
 <View style = {{width : Dimensions.get("window").width,height : 'auto'}}>
 <Text style = {{color:'white',fontSize : 25,paddingLeft : 30}}>Harmful Gases</Text>
 <View style = {{justifyContent : 'center',alignItems : 'center'}}>
-<Text style = {{color:'white',position : 'absolute'}}>{data.Gas + '%'}</Text>
+<Text style = {{color:'white',position : 'absolute'}}>{data.Gas/100 + '%'}</Text>
   <ProgressChart
   data={data3}
   width={Dimensions.get("window").width-50}
