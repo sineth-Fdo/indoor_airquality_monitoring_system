@@ -28,9 +28,9 @@ const RealTimeData = () => {
       setData(data);
 
       setTimeout(() => {
-        setHumidity(data.Humidity);
-        setTemperature(data.Temperature);
-        setGas(data.Gas);
+        setHumidity(data.Humidity/100);
+        setTemperature(data.Temperature/100);
+        setGas(data.Gas/10000);
       }, 5000);
 
   
