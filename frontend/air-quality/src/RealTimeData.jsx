@@ -15,6 +15,9 @@ import { StatusBar } from 'expo-status-bar';
 
 const RealTimeData = () => {
   const [data, setData] = useState({});
+  const [Humidity, setHumidity] = useState(100);
+  const [Temperature, setTemperature] = useState(100);
+  const [Gas, setGas] = useState(100);
 
   useEffect(() => {
     const database = getDatabase();
@@ -24,6 +27,14 @@ const RealTimeData = () => {
       const data = snapshot.val();
       console.log('Data: ', data);
       setData(data);
+
+      setTimeout(() => {
+        setHumidity(data.Humidity/100);
+        setTemperature(data.Temperature/100);
+        setGas(data.Gas/10000);
+      }, 5000);
+
+  
     });
 
     return () => unsubscribe(); 
@@ -32,7 +43,7 @@ const RealTimeData = () => {
   const data1 = {
     labels: ["Humidity"], // optional
     data: [
-      data.Humidity/100,
+      Humidity,
     ]
     // data: [data.Humidity,]
     
@@ -41,7 +52,7 @@ const RealTimeData = () => {
   const data2 = {
     labels: ["Temp"], // optional
     data: [
-      data.Temperature/100,
+      Temperature,
     ]
     
   };
@@ -49,7 +60,7 @@ const RealTimeData = () => {
   const data3 = {
     labels: ["Gas"], // optional
     data: [
-      data.Gas/10000,
+      Gas,
     ]
   
   }
