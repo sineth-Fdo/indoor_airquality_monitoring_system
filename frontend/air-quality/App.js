@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import RealTimeData from './src/RealTimeData';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Analysis from './src/Analysis';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +23,11 @@ const App = () => {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Analysis"
+          component={Analysis}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

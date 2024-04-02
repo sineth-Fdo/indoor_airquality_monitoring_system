@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Dimensions, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Dimensions, SafeAreaView, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { db } from '../config'; 
 import { useNavigation } from '@react-navigation/native';
@@ -12,12 +12,29 @@ import {
   StackedBarChart
 } from "react-native-chart-kit";
 import { StatusBar } from 'expo-status-bar';
+import { addDataToFirestore } from '../config'; 
+
+
 
 const RealTimeData = () => {
+
+  const navigate = useNavigation();
+
   const [data, setData] = useState({});
   const [Humidity, setHumidity] = useState(100);
   const [Temperature, setTemperature] = useState(100);
   const [Gas, setGas] = useState(100);
+
+    // Sample data for adding to Firestore
+    const sampleData = {
+      label: 'Sample Data',
+      value: 100,
+  };
+
+  // Function to handle press event
+  const handlePress = () => {
+      addDataToFirestore(sampleData); // Add sample data to Firestore
+  };
 
   useEffect(() => {
     const database = getDatabase();
@@ -71,6 +88,7 @@ const RealTimeData = () => {
     <SafeAreaView 
       style = {{ justifyContent : 'start', alignItems : 'center', width : '100%', height : '100%', backgroundColor : '#071414',}}
       >
+  
   <StatusBar hidden = {false} backgroundColor='gray'/>
 
       <ScrollView style = {{paddingTop : 30}}>
@@ -84,7 +102,9 @@ const RealTimeData = () => {
       <View style = {{width : Dimensions.get("window").width,height : 'auto'}}>
           <View style = {{height: 'auto', width : Dimensions.get("window").width, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems:'center'}}>
             <Text style = {{color:'white',fontSize : 25,paddingLeft : 30, marginTop: 10}}>Humidity</Text>
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity onPress={() => {
+              navigation.navigate('Analysis');
+            }}>
               <Text style = {{paddingRight : 30, paddingTop: 10, color: 'white', }}>See More</Text>
             </TouchableOpacity>
           </View>
@@ -189,5 +209,28 @@ const RealTimeData = () => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#071414',
+  },
+  title: {
+      color: 'white',
+      fontSize: 30,
+      marginTop: 50,
+      marginBottom: 20,
+  },
+  button: {
+      color: 'white',
+      fontSize: 18,
+      padding: 10,
+      backgroundColor: '#1e90ff',
+      borderRadius: 8,
+      marginTop: 20,
+  },
+  });
 
 export default RealTimeData;
